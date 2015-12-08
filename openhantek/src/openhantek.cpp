@@ -502,7 +502,6 @@ void OpenHantekMainWindow::applySettings() {
 		if(!dockSettings[dockId]->position.isNull()) {
 			if(dockSettings[dockId]->floating) {
 				this->addDockWidget(Qt::RightDockWidgetArea, docks[dockId]);
-				// docks[dockId]->setFloating(dockSettings[dockId]->floating);
 				docks[dockId]->move(dockSettings[dockId]->position);
 			}
 			else {
@@ -540,7 +539,6 @@ void OpenHantekMainWindow::applySettings() {
 	
 	for(int toolbarId = 0; toolbarId < toolbars.size(); ++toolbarId) {
 		toolbars[toolbarId]->setVisible(toolbarSettings[toolbarId]->visible);
-		//toolbars[toolbarId]->setFloating(toolbarSettings[toolbarId]->floating); // setFloating missing, a bug in Qt?
 		toolbars[toolbarId]->setWindowFlags(Qt::Tool);
 		if(!toolbarSettings[toolbarId]->position.isNull() && !toolbarSettings[toolbarId]->floating) {
 			/*if(toolbarSettings[toolbarId]->floating) {
@@ -584,7 +582,7 @@ void OpenHantekMainWindow::updateSettings() {
 	dockSettings.append(&(this->settings->options.window.dock.voltage));
 	
 	for(int dockId = 0; dockId < docks.size(); ++dockId) {
-		dockSettings[dockId]->floating = false;//docks[dockId]->isFloating();
+		dockSettings[dockId]->floating = docks[dockId]->isFloating();
 		dockSettings[dockId]->position = docks[dockId]->pos();
 		dockSettings[dockId]->visible = docks[dockId]->isVisible();
 	}
@@ -601,7 +599,7 @@ void OpenHantekMainWindow::updateSettings() {
 	toolbarSettings.append(&(this->settings->options.window.toolbar.view));
 	
 	for(int toolbarId = 0; toolbarId < toolbars.size(); ++toolbarId) {
-		toolbarSettings[toolbarId]->floating = false;//toolbars[toolbarId]->isFloating();
+		toolbarSettings[toolbarId]->floating = toolbars[toolbarId]->isFloating();
 		toolbarSettings[toolbarId]->position = toolbars[toolbarId]->pos();
 		toolbarSettings[toolbarId]->visible = toolbars[toolbarId]->isVisible();
 	}
