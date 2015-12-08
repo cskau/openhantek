@@ -569,6 +569,7 @@ VoltageDock::VoltageDock(DsoSettings *settings, QWidget *parent, Qt::WindowFlags
 	
 	this->dockWidget = new QWidget();
 	this->dockWidget->setLayout(this->dockLayout);
+	this->dockWidget->setWindowFlags(Qt::Tool);
 	this->setWidget(this->dockWidget);
 	
 	// Connect signals and slots
